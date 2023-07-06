@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import axios from 'axios';
 import {
   Box,
   Container,
@@ -12,7 +13,6 @@ import {
   FormControl,
   FormLabel,
 } from '@chakra-ui/react';
-import axios from 'axios';
 
 const AddQuestion = () => {
   const navigate = useNavigate();
@@ -33,10 +33,15 @@ const AddQuestion = () => {
   };
 
   const handleAddQuestion = async () => {
+    const filteredQuestions = questionInputs.filter((input) => input.question.trim() !== '');
+    if (filteredQuestions.length === 0) {
+      console.log('Aucune question valide à ajouter.');
+      return;
+    }
+
     try {
-      const questions = questionInputs.map((input) => ({ question: input.question }));
       const response = await axios.post('http://localhost:3010/questions/bulk', {
-        questions,
+        questions: filteredQuestions.map((input) => ({ question: input.question })),
       });
       console.log('Questions ajoutées avec succès:', response.data);
 
@@ -85,7 +90,7 @@ const AddQuestion = () => {
               bg={'green.400'}
               px={6}
               onClick={handleAddQuestion}
-              disabled={questionInputs.some((input) => !input.question)}>
+              disabled={questionInputs.every((input) => input.question.trim() === '')}>
               Ajouter les questions
             </Button>
           </Stack>
