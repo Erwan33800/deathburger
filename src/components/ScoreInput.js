@@ -2,12 +2,10 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Heading, Input, Button, Flex, Alert, AlertIcon } from '@chakra-ui/react';
-import { AlertContext } from './AlertContext';
 
 const ScoreInput = () => {
   const [pseudo, setPseudo] = useState('');
   const [scoreDB, setScoreDB] = useState('');
-  const { showAlert } = useContext(AlertContext);
   const navigate = useNavigate();
 
   const handlePseudoChange = (event) => {
@@ -28,13 +26,11 @@ const ScoreInput = () => {
       });
       console.log('Score enregistré avec succès:', response.data);
 
-      showAlert('Score ajouté avec succès', 'success');
       setPseudo('');
       setScoreDB('');
       navigate('/leaderboard');
     } catch (error) {
       console.log('Une erreur s\'est produite lors de l\'enregistrement du score:', error);
-      showAlert('Une erreur s\'est produite lors de l\'enregistrement du score', 'error');
     }
   };
 
@@ -65,13 +61,6 @@ const ScoreInput = () => {
           Enregistre le score Beau-Gosse
         </Button>
       </form>
-
-      {showAlert && (
-        <Alert status={showAlert.type} mt={4}>
-          <AlertIcon />
-          {showAlert.message}
-        </Alert>
-      )}
     </Box>
   );
 };

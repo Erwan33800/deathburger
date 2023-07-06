@@ -27,6 +27,7 @@ const App = () => {
   return (
     <Container maxW={'3xl'}>
       <Stack
+        color="white"
         as={Box}
         textAlign={'center'}
         spacing={{ base: 8, md: 14 }}
@@ -34,13 +35,15 @@ const App = () => {
         <Heading
           fontWeight={600}
           fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-          lineHeight={'110%'}>
+          lineHeight={'110%'}
+          textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+        >
           Burger de la Mort <br />
-          <Text as={'span'} color={'green.400'}>
+          <Text as='span' color='green.400'>
             MAZ 2023
           </Text>
         </Heading>
-        <Text color={'gray.500'}>
+        <Text color='white' fontSize="lg">
           Bienvenue dans la folie du "Burger de la Mort" ! C'est parti pour un tourbillon de 10 questions où ton cerveau va s'entortiller ! Mais attention, pas de triche, tu dois retenir les réponses jusqu'à la fin. C'est comme manger un burger géant sans perdre le fromage entre les tranches. Prêt à te régaler d'un défi cérébral savoureux ?
         </Text>
         <Stack
@@ -52,10 +55,10 @@ const App = () => {
           <Button
             onClick={handleQuizStart}
             colorScheme={'green'}
-            bg={'green.400'}
+            bg={'green.300'}
             px={6}
             _hover={{
-              bg: 'green.500',
+              bg: 'green.400',
             }}>
             Let's go !!
           </Button>

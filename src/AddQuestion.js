@@ -12,6 +12,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Link
 } from '@chakra-ui/react';
 
 const AddQuestion = () => {
@@ -35,6 +36,7 @@ const AddQuestion = () => {
   const handleAddQuestion = async () => {
     const filteredQuestions = questionInputs.filter((input) => input.question.trim() !== '');
     if (filteredQuestions.length === 0) {
+      alert('Aucune question valide à ajouter.');
       console.log('Aucune question valide à ajouter.');
       return;
     }
@@ -59,12 +61,23 @@ const AddQuestion = () => {
         spacing={{ base: 8, md: 14 }}
         py={{ base: 20, md: 36 }}>
         <Heading
+        color='white'
           fontWeight={600}
           fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
           lineHeight={'110%'}>
           Créer une question
         </Heading>
-        <Text color={'gray.500'}>Ajoute une nouvelle question à la liste.</Text>
+        <Link href="/">
+          <Button
+            colorScheme={'green'}
+            bg={'green.400'}
+            px={6}
+            _hover={{
+              bg: 'green.500',
+            }}>
+            Retour au menu
+          </Button>
+        </Link>
         <Box
           rounded={'lg'}
           bg={'white'}
