@@ -6,7 +6,6 @@ const Question = ({ question }) => {
   return (
     <Box bg="gray.200" p={4} mb={4}>
       <Text fontSize="lg">{question}</Text>
-      <Text fontSize="lg">exmeple questisfdgsdfgdsgdsgon</Text>
     </Box>
   );
 };

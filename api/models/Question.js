@@ -10,7 +10,7 @@ const Question = sequelize.define('question', {
     autoIncrement: true
   },
   question: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(500),
     allowNull: false
   },
   nbSelection: {
