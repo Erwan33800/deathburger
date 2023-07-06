@@ -1,21 +1,31 @@
 const express = require('express');
-const connection = require('./db/connection');
+const sequelize = require('./config/database');
 const questionController = require('./controllers/questionController');
+const answerController = require('./controllers/answerController');
+const cors = require('cors');
 
 const app = express();
 
-connection.connect((error) => {
-  if (error) {
-    console.error('Error connecting to database:', error);
-  } else {
-    console.log('Connected to database');
-  }
-});
+const corsOptions = {
+  origin: 'http://localhost:3000'
+};
+
+app.use(cors(corsOptions));
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database:', error);
+  });
 
 app.use(express.json());
 
 app.use('/questions', questionController);
+app.use('/answers', answerController);
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(3010, () => {
+  console.log('Server is running on port 3010');
 });

@@ -1,42 +1,22 @@
 // models/Question.js
 
-const connection = require('../db/connection');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-class Question {
-  static getRandomQuestions(limit) {
-    return new Promise((resolve, reject) => {
-      const query = `
-        SELECT *
-        FROM questions
-        ORDER BY nbSelection
-        LIMIT ?
-      `;
-      connection.query(query, [limit], (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
+const Question = sequelize.define('question', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  question: {
+    type: DataTypes.STRING(500),
+    allowNull: false
+  },
+  nbSelection: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
   }
-
-  static incrementSelectionCount(questionId) {
-    return new Promise((resolve, reject) => {
-      const query = `
-        UPDATE questions
-        SET nbSelection = nbSelection + 1
-        WHERE id = ?
-      `;
-      connection.query(query, [questionId], (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-}
+});
 
 module.exports = Question;

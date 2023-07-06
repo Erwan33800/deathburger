@@ -1,31 +1,50 @@
-import React, { useState } from 'react';
-import { 
-  ChakraProvider, 
-  Box, 
-  Heading, 
-  Button,
-  Container,
-  Text,  
-  Stack,
-  Icon,
-  useColorModeValue,
-  createIcon, 
-} from '@chakra-ui/react';
-import Quiz from './components/Quiz';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ScoreInput from './components/ScoreInput';
-import ScoreMenu from './components/ScoreMenu';
+import { Container, Stack, Box, Button, Link, Heading } from '@chakra-ui/react';
+import Question from './components/Question';
 
-const App = () => {
+const Questions = () => {
+  const location = useLocation();
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const { state } = location;
+    if (state && state.questions) {
+      setQuestions(state.questions);
+    }
+  }, [location]);
 
   return (
-    <div>
-        <h1>page des questions</h1>
-        <Quiz questions={questions} />
-        <ScoreInput onSubmit={handleScoreSubmit} />
-        <ScoreMenu scores={scores} />
-    </div>
-    
+    <Container maxW={'3xl'}>
+      <Stack
+        as={Box}
+        textAlign={'center'}
+        spacing={{ base: 8, md: 14 }}
+        py={{ base: 20, md: 36 }}>
+        <Link href="/">
+          <Button
+            colorScheme={'green'}
+            bg={'green.400'}
+            px={6}
+            _hover={{
+              bg: 'green.500',
+            }}>
+            Retour au menu
+          </Button>
+        </Link>
+        <Box>
+          <Heading as="h2" size="lg" mb={4}>
+            Voici les 10 questions !
+          </Heading>
+          {questions.map((question, index) => (
+            <Question key={index} question={question.question} />
+          ))}
+        </Box>
+        <ScoreInput />
+      </Stack>
+    </Container>
   );
 };
 
-export default App;
+export default Questions;
