@@ -49,20 +49,25 @@ const App = () => {
           align={'center'}
           alignSelf={'center'}
           position={'relative'}>
-            <Button
-              onClick={handleQuizStart}
-              colorScheme={'green'}
-              bg={'green.400'}
-              px={6}
-              _hover={{
-                bg: 'green.500',
-              }}>
-              Let's go !!
-            </Button>
+          <Button
+            onClick={handleQuizStart}
+            colorScheme={'green'}
+            bg={'green.400'}
+            px={6}
+            _hover={{
+              bg: 'green.500',
+            }}>
+            Let's go !!
+          </Button>
 
           <Button colorScheme={'blue'} px={6}>
             Classement
           </Button>
+          <Link href="/addQuestion">
+            <Button colorScheme={'red'} px={6}>
+              Créer une question
+            </Button>          
+          </Link>
         </Stack>
       </Stack>
     </Container>

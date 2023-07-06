@@ -1,6 +1,7 @@
 const express = require('express');
 const sequelize = require('./config/database');
 const questionController = require('./controllers/questionController');
+const answerController = require('./controllers/answerController');
 const cors = require('cors');
 
 const app = express();
@@ -23,6 +24,7 @@ sequelize
 app.use(express.json());
 
 app.use('/questions', questionController);
+app.use('/answers', answerController);
 
 app.listen(3010, () => {
   console.log('Server is running on port 3010');
