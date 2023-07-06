@@ -48,7 +48,6 @@ const App = () => {
                 onClick={handleQuizStart}
                 colorScheme={'green'}
                 bg={'green.400'}
-                rounded={'full'}
                 px={6}
                 _hover={{
                     bg: 'green.500',
@@ -57,9 +56,7 @@ const App = () => {
                 </Button>
             </Link>
             
-            <Button 
-              rounded={'full'} colorScheme={'blue'} size={'sm'} 
-              px={6}>
+            <Button colorScheme={'blue'} px={6}>
               Classement
             </Button>
           </Stack>

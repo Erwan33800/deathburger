@@ -7,7 +7,7 @@ const Quiz = ({ questions }) => {
   return (
     <Box>
       <Heading as="h2" size="lg" mb={4}>
-        Quiz
+        Voici les 10 questions !
       </Heading>
       {questions.map((question, index) => (
         <Question key={index} question={question} />

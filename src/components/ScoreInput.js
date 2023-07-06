@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Heading, Input, Button } from '@chakra-ui/react';
+import { Box, Heading, Input, Button, Flex } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 const ScoreInput = ({ onSubmit }) => {
@@ -24,23 +24,26 @@ const ScoreInput = ({ onSubmit }) => {
   return (
     <Box>
       <Heading as="h2" size="lg" mb={4}>
-        Score Input
+        Valide le score !
       </Heading>
       <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
-          mb={2}
-        />
-        <Input
-          type="number"
-          placeholder="Score"
-          value={score}
-          onChange={handleScoreChange}
-          mb={2}
-        />
+        <Flex>
+          <Input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={handleNameChange}
+            mb={2}
+          />
+          <Input
+            type="number"
+            placeholder="Score"
+            value={score}
+            onChange={handleScoreChange}
+            mb={2}
+          />
+        </Flex>
+        
         <Button colorScheme="blue" type="submit">
           Submit
         </Button>
