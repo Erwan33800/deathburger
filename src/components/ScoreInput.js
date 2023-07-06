@@ -1,24 +1,38 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Box, Heading, Input, Button, Flex } from '@chakra-ui/react';
-import PropTypes from 'prop-types';
 
-const ScoreInput = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [score, setScore] = useState('');
+const ScoreInput = () => {
+  const [pseudo, setPseudo] = useState('');
+  const [scoreDB, setScoreDB] = useState('');
+  const navigate = useNavigate();
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const handlePseudoChange = (event) => {
+    setPseudo(event.target.value);
   };
 
   const handleScoreChange = (event) => {
-    setScore(event.target.value);
+    setScoreDB(parseInt(event.target.value));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(name, score);
-    setName('');
-    setScore('');
+
+    try {
+      const response = await axios.post('http://localhost:3010/answers', {
+        pseudo: pseudo,
+        scoreDB: scoreDB,
+      });
+      console.log('Score enregistré avec succès:', response.data);
+
+      // Réinitialise les valeurs
+      setPseudo('');
+      setScoreDB(0);
+      navigate('/');
+    } catch (error) {
+      console.log('Une erreur s\'est produite lors de l\'enregistrement du score:', error);
+    }
   };
 
   return (
@@ -27,33 +41,29 @@ const ScoreInput = ({ onSubmit }) => {
         Valide le score !
       </Heading>
       <form onSubmit={handleSubmit}>
-        <Flex>
+        <Flex mt={10}>
           <Input
             type="text"
-            placeholder="Name"
-            value={name}
-            onChange={handleNameChange}
+            placeholder="Pseudo"
+            value={pseudo}
+            onChange={handlePseudoChange}
             mb={2}
           />
           <Input
             type="number"
             placeholder="Score"
-            value={score}
+            value={scoreDB}
             onChange={handleScoreChange}
             mb={2}
           />
         </Flex>
         
-        <Button colorScheme="blue" type="submit">
-          Submit
+        <Button colorScheme="blue" type="submit" mt={10}>
+          Enregistre le score Beau-Gosse
         </Button>
       </form>
     </Box>
   );
-};
-
-ScoreInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default ScoreInput;

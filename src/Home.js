@@ -60,9 +60,12 @@ const App = () => {
             Let's go !!
           </Button>
 
-          <Button colorScheme={'blue'} px={6}>
-            Classement
-          </Button>
+          <Link href="/leaderboard">
+            <Button colorScheme={'blue'} px={6}>
+              Classement
+            </Button>
+          </Link>
+          
           <Link href="/addQuestion">
             <Button colorScheme={'red'} px={6}>
               Créer une question
