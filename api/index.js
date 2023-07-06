@@ -1,16 +1,17 @@
 const express = require('express');
-const connection = require('./db/connection');
+const sequelize = require('./config/database');
 const questionController = require('./controllers/questionController');
 
 const app = express();
 
-connection.connect((error) => {
-  if (error) {
-    console.error('Error connecting to database:', error);
-  } else {
-    console.log('Connected to database');
-  }
-});
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database:', error);
+  });
 
 app.use(express.json());
 
